@@ -1,0 +1,72 @@
+<form
+  [formGroup]="registerForm"
+  (ngSubmit)="onSubmit()"
+  class="register-form"
+  style="
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 32px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px #0001;
+  "
+>
+  <h2 style="text-align: center; font-size: 2rem; font-weight: bold; margin-bottom: 24px">
+    Register
+  </h2>
+  <mat-form-field appearance="outline" class="w-full mb-6">
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="name" autocomplete="name" />
+    @if (f['name'].touched && f['name'].invalid) {
+      <mat-error>
+        @for (error of objectEntries(f['name'].errors ?? {}); track $index) {
+          <span *ngIf="error[0] === 'required'">Name is required.</span>
+        }
+      </mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="w-full mb-6">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" autocomplete="email" />
+    @if (f['email'].touched && f['email'].invalid) {
+      <mat-error>
+        @for (error of objectEntries(f['email'].errors ?? {}); track $index) {
+          <span *ngIf="error[0] === 'required'">Email is required.</span>
+          <span *ngIf="error[0] === 'email'">Invalid email address.</span>
+        }
+      </mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="w-full mb-6">
+    <mat-label>Password</mat-label>
+    <input matInput type="password" formControlName="password" autocomplete="new-password" />
+    @if (f['password'].touched && f['password'].errors) {
+      <mat-error>
+        @if (f['password'].errors['required']) {
+          <span>Password is required.</span>
+        }
+        @if (f['password'].errors['minlength']) {
+          <span>Password must be at least 6 characters.</span>
+        }
+        @if (f['password'].errors['strength']) {
+          <span>Password must contain at least one uppercase letter and one number.</span>
+        }
+      </mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="w-full mb-6">
+    <mat-label>Confirm Password</mat-label>
+    <input matInput type="password" formControlName="confirmPassword" autocomplete="new-password" />
+    @if (f['confirmPassword'].touched && f['confirmPassword'].errors) {
+      <mat-error>
+        @if (f['confirmPassword'].errors['required']) {
+          <span>Confirm password is required.</span>
+        }
+        @if (f['confirmPassword'].errors['passwordMismatch']) {
+          <span>Passwords do not match.</span>
+        }
+      </mat-error>
+    }
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit" class="w-full">Register</button>
+</form>

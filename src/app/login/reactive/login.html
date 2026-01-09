@@ -1,0 +1,44 @@
+<form
+  [formGroup]="loginForm"
+  (ngSubmit)="onSubmit()"
+  style="
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 32px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px #0001;
+  "
+  class="p-8 rouded-md"
+>
+  <h2 style="text-align: center; font-size: 2rem; font-weight: bold; margin-bottom: 24px">Login</h2>
+  <mat-form-field appearance="outline" class="w-full mb-6">
+    <mat-label>Email</mat-label>
+    <input matInput type="email" formControlName="email" />
+    @if (email.invalid && (email.touched || email.dirty)) {
+      <mat-error>
+        @if (email.hasError('required')) {
+          <span>Email is required.</span>
+        }
+        @if (email.hasError('email')) {
+          <span>Invalid email address.</span>
+        }
+      </mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="w-full mb-6">
+    <mat-label>Password</mat-label>
+    <input matInput type="password" formControlName="password" />
+    @if (password.invalid && (password.touched || password.dirty)) {
+      <mat-error>
+        @if (password.hasError('required')) {
+          <span>Password is required.</span>
+        }
+        @if (password.hasError('minlength')) {
+          <span>Password must be at least 6 characters.</span>
+        }
+      </mat-error>
+    }
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit" class="w-full">Login</button>
+</form>

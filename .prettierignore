@@ -1,0 +1,15 @@
+# Ignore everything
+/*
+
+# Except these files & folders
+!/src
+!index.html
+!angular.json
+!package.json
+!tsconfig.app.json
+!tsconfig.spec.json
+!tsconfig.json
+!.prettierrc
+!README.md
+!CHANGELOG.md
+!.eslintrc.cjs

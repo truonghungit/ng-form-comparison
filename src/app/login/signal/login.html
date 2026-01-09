@@ -1,0 +1,51 @@
+<form
+  [attr.novalidate]="true"
+  (submit)="onSubmit($event)"
+  style="
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 32px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px #0001;
+  "
+  class="p-8 rouded-md"
+>
+  <h2 style="text-align: center; font-size: 2rem; font-weight: bold; margin-bottom: 24px">Login</h2>
+  <mat-form-field appearance="outline" class="w-full mb-6">
+    <mat-label>Email</mat-label>
+    <input matInput type="email" [field]="loginForm.email" />
+    @if (
+      loginForm.email().invalid() && (loginForm.email().touched() || loginForm.email().dirty())
+    ) {
+      <mat-error>
+        @for (error of loginForm.email().errors(); track error) {
+          <div>{{ error.message }}</div>
+        }
+      </mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="w-full mb-6">
+    <mat-label>Password</mat-label>
+    <input matInput type="password" [field]="loginForm.password" />
+    @if (
+      loginForm.password().invalid() &&
+      (loginForm.password().touched() || loginForm.password().dirty())
+    ) {
+      <mat-error>
+        @for (error of loginForm.password().errors(); track error) {
+          <div>{{ error.message }}</div>
+        }
+      </mat-error>
+    }
+  </mat-form-field>
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    class="w-full"
+    [disabled]="loginForm().submitting()"
+  >
+    Login
+  </button>
+</form>

@@ -1,0 +1,61 @@
+<form
+  [attr.novalidate]="true"
+  (submit)="onSubmit($event)"
+  style="
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 32px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px #0001;
+  "
+>
+  <h2 style="text-align: center; font-size: 2rem; font-weight: bold; margin-bottom: 24px">
+    Register
+  </h2>
+  <mat-form-field appearance="outline" class="w-full mb-6">
+    <mat-label>Name</mat-label>
+    <input matInput type="text" [field]="registerForm.name" />
+    @if (registerForm.name().touched() && registerForm.name().invalid()) {
+      <mat-error>
+        @for (error of registerForm.name().errors(); track error) {
+          <div>{{ error.message }}</div>
+        }
+      </mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="w-full mb-6">
+    <mat-label>Email</mat-label>
+    <input matInput type="email" [field]="registerForm.email" />
+    @if (registerForm.email().touched() && registerForm.email().invalid()) {
+      <mat-error>
+        @for (error of registerForm.email().errors(); track error) {
+          <div>{{ error.message }}</div>
+        }
+      </mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="w-full mb-6">
+    <mat-label>Password</mat-label>
+    <input matInput type="password" [field]="registerForm.password" />
+    @if (registerForm.password().touched() && registerForm.password().invalid()) {
+      <mat-error>
+        @for (error of registerForm.password().errors(); track error) {
+          <div>{{ error.message }}</div>
+        }
+      </mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="w-full mb-6">
+    <mat-label>Confirm Password</mat-label>
+    <input matInput type="password" [field]="registerForm.confirmPassword" />
+    @if (registerForm.confirmPassword().touched() && registerForm.confirmPassword().invalid()) {
+      <mat-error>
+        @for (error of registerForm.confirmPassword().errors(); track error) {
+          <div>{{ error.message }}</div>
+        }
+      </mat-error>
+    }
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit" class="w-full">Register</button>
+</form>
